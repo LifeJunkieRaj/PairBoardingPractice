@@ -7,20 +7,25 @@
 
 let isValid = function (s) {
     let bracket = {
-    '(':')', '[':']', '{':'}'
-}
-
-let heap = [];
-
-for (let char of s) {
-    if (bracket[char]) {
-        heap.push(bracket[char])
-    } else {
-        if (heap.pop() !== char) return false
+        '(': ')', '[': ']', '{': '}'
     }
-}
-return (!heap.length)
+
+    let stack = [];
+
+    for (let char of s) {
+        if (bracket[char]) {
+            stack.push(bracket[char])
+            console.log("====1>", stack)
+        } else {
+            if (stack.pop() !== char) {
+                console.log("====2>", stack)
+                return false
+            }
+        }
+    }
+    console.log(stack.length)
+    return (!stack.length)
 }
 
-s = "(]"
+s = "(]{}[]"
 console.log(isValid(s));
